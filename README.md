@@ -20,8 +20,18 @@ pip install -r requirements.txt
 
 Now you can use the `client/client.py` to add jobs.
 
+Example usage:
+
+```
+./client/client.py --reserve 60 --url tcp://:some_password@localhost:4719 ubuntu:latest sleep 30
+```
+
 Keep `worker/worker.py` running and all your tasks should be executed. By
 default, it will run as jobs as there are cores on the machine you are using.
+
+```
+./worker/worker.py --url tcp://:some_password@localhost:4719 --cores 2
+```
 
 Don't expect any output from your container.
 
