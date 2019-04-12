@@ -1,6 +1,5 @@
 from faktory import Worker
 
-import time
 import logging
 import docker
 import multiprocessing

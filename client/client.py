@@ -1,5 +1,4 @@
 import faktory
-import time
 import argparse
 
 
