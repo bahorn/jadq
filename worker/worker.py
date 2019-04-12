@@ -13,7 +13,7 @@ time.sleep(1)
 def docker_runner(image, arguments):
     logging.info("starting {} with {}".format(image, arguments))
     client = docker.from_env()
-    client.containers.run(image, arguments)
+    client.containers.run(image, arguments, auto_remove=True)
 
 def main(faktory_url='tcp://localhost:7419', queues=['default'], concurrency=1):
     logging.info('Faktory Instance: {}'.format(faktory_url))
