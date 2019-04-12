@@ -2,9 +2,10 @@ import faktory
 import argparse
 
 
-def main(container, arguments, faktory_url='tcp://localhost:7419'):
+def main(container, arguments, faktory_url='tcp://localhost:7419',
+         reserve=3600*4):
     with faktory.connection(faktory=faktory_url) as client:
-        client.queue('docker', args=(container, arguments))
+        client.queue('docker', args=(container, arguments), reserve_for=reserve)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Docker job client')
@@ -13,6 +14,14 @@ if __name__ == "__main__":
         nargs='?',
         default='tcp://localhost:7419',
         help='Faktory Instance to connect to'
+    )
+
+    parser.add_argument(
+        '--reserve',
+        nargs='?',
+        type=int,
+        default=3600*4,
+        help='Time in Seconds before a job gets returned to the job pool'
     )
 
     parser.add_argument(
@@ -26,11 +35,11 @@ if __name__ == "__main__":
         help='arguments to pass container'
     )
 
-
     args=parser.parse_args()
 
     main(
         args.container,
         args.arguments,
-        faktory_url=args.url
+        faktory_url=args.url,
+        reserve=args.reserve
     )
