@@ -8,8 +8,6 @@ import argparse
 
 logging.basicConfig(level=logging.INFO)
 
-time.sleep(1)
-
 def docker_runner(image, arguments):
     logging.info("starting {} with {}".format(image, arguments))
     client = docker.from_env()

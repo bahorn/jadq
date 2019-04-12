@@ -4,10 +4,8 @@ import argparse
 
 
 def main(container, arguments, faktory_url='tcp://localhost:7419'):
-    time.sleep(1)
     with faktory.connection(faktory=faktory_url) as client:
         client.queue('docker', args=(container, arguments))
-        time.sleep(1)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Docker job client')
